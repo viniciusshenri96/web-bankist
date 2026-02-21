@@ -112,3 +112,16 @@ const calcDisplaySummary = function (acc) {
 };
 
 calcDisplaySummary(account1);
+
+const createUsername = function (accounts) {
+  accounts.forEach(
+    acc =>
+      (acc.username = acc.owner
+        .toLowerCase()
+        .split(' ')
+        .map(user => user[0])
+        .join('')),
+  );
+};
+
+createUsername(accounts);
