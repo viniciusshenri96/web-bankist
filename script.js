@@ -157,7 +157,7 @@ btnTransfer.addEventListener('click', function (e) {
   );
 
   inputTransferTo.value = inputTransferAmount.value = '';
-  console.log(currentAccount);
+
   if (
     amount > 0 &&
     receiverAcc &&
@@ -169,4 +169,17 @@ btnTransfer.addEventListener('click', function (e) {
 
     updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+
+  // o emprestimo só é concedido se houver pelo menos um deposito com pelo menos 10% do valor do emprestimo solicitado
+  if (amount > 0 && currentAccount.movements.every(mov => mov >= amount / 10)) {
+    currentAccount.movements.push(amount);
+
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
 });
