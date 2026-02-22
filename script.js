@@ -71,6 +71,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // Displaying user account movements
 const displayMovements = function (movements) {
+  containerApp.innerHTML = '';
   movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
@@ -176,10 +177,30 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Number(inputLoanAmount.value);
 
   // o emprestimo só é concedido se houver pelo menos um deposito com pelo menos 10% do valor do emprestimo solicitado
-  if (amount > 0 && currentAccount.movements.every(mov => mov >= amount / 10)) {
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount / 10)) {
     currentAccount.movements.push(amount);
 
     updateUI(currentAccount);
   }
   inputLoanAmount.value = '';
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const username = inputCloseUsername.value;
+  const pin = Number(inputClosePin.value);
+
+  if (username === currentAccount?.username && pin === currentAccount?.pin) {
+    const index = accounts.find(
+      acc => acc.username === currentAccount.username,
+    );
+
+    // Delete account
+    accounts.splice(index, 1);
+
+    containerApp.style.opacity = 0;
+
+    inputCloseUsername.value = inputClosePin.value = '';
+  }
 });
