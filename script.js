@@ -70,12 +70,16 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // LECTURES
 
 // Displaying user account movements
-const displayMovements = function (movements) {
-  containerApp.innerHTML = '';
-  movements.forEach(function (mov, i) {
+const displayMovements = function (movements, sort = false) {
+  containerMovements.innerHTML = '';
+
+  // foi usado o paramentro slice() para criar um array e não modificar o array original
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
-       <div class="movements__row">
+       <div class="movements__row">implem
         <div class="movements__type movements__type--${type}">${i} ${type}</div>
         <div class="movements__value">${mov}€</div>
       </div>
@@ -192,7 +196,7 @@ btnClose.addEventListener('click', function (e) {
   const pin = Number(inputClosePin.value);
 
   if (username === currentAccount?.username && pin === currentAccount?.pin) {
-    const index = accounts.find(
+    const index = accounts.findIndex(
       acc => acc.username === currentAccount.username,
     );
 
@@ -203,4 +207,12 @@ btnClose.addEventListener('click', function (e) {
 
     inputCloseUsername.value = inputClosePin.value = '';
   }
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
