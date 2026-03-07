@@ -6,14 +6,14 @@
 	BANKIST - Completed ✅
 </h2>
 
-<h2 id="#description">Project description 📚</h2>
+<h2 id="#description">- Project description 📚</h2>
 
 This project was developed to put array and dates methods into practice in JavaScript
 
 <h3>The objective of the project is to simulate a bank with transfers, account closing and loans, see below for a quick preview: </h3>
 <img width='900px'src="bankist-gif.gif" align="center"/>
 
-<h2 id="#description">Flowchart of what will be implemented in the project.📝</h2>
+<h3 id="#description">- Flowchart project.📝</h3>
 <img width='700px'src="Bankist-flowchart.png" align=""/>
 
 ## Technology
