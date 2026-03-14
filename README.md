@@ -25,7 +25,7 @@ This project was developed with the following technologies:
 
 <hr>
 
-Main array methods used in the project:
+Main array methods used in the project, Dates, Internationalizing Dates (Intl) and SetTimeout, setInterval and clearInterval:
 
 - [forEach()](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
 
@@ -42,6 +42,68 @@ Main array methods used in the project:
 - [join()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
 
 - [push()](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+
+Internationalizing Dates (Intl) ans Dates:
+
+```js
+// Internationalizing Dates (Intl)
+const formatCur = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
+};
+```
+
+Dates:
+
+```js
+// Dates
+const now = new Date();
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'numeric',
+  year: 'numeric',
+};
+labelDate.textContent = new Intl.DateTimeFormat(
+  currentAccount.locale,
+  options,
+).format(now);
+```
+
+Implementing a Countdown Timer:
+
+```js
+const startLogOutTimer = function () {
+  // Set time to 5 minutes
+
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    // In each call, print the remaining time to  UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // When 0 seconds, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+    // Decrese 1s
+    time--;
+  };
+
+  let time = 300;
+
+  // Call the timer every second
+  // OBS: setInterval only runs for the first time after 1s
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+```
 
 <br />
 
