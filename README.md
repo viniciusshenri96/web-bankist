@@ -105,6 +105,10 @@ const startLogOutTimer = function () {
 };
 ```
 
+## Links
+
+- [Preview project](https://vinicius-bankist.netlify.app/)
+
 <br />
 
 ## 👨🏽‍💻 Author
